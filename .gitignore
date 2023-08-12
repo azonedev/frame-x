@@ -1,0 +1,17 @@
+
+# Ignore user-specific IDE and text editor files
+.idea/
+.vscode/
+
+# Ignore Composer dependencies
+/app/vendor/
+
+# Ignore Docker artifacts, data and logs
+.dockerignore
+.data
+docker-compose.yml
+
+# Ignore environment files 
+.env
+
+
