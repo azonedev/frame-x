@@ -1,4 +1,3 @@
-
 # Ignore user-specific IDE and text editor files
 .idea/
 .vscode/
@@ -13,5 +12,5 @@ docker-compose.yml
 
 # Ignore environment files 
 .env
-
+app/.env
 

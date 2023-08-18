@@ -1,0 +1,19 @@
+{
+    "name": "azonedev/framex",
+    "description": "A PHP Micro MVC Framework with Docker Containerization",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Abdullah Al Mamun",
+            "email": "abdullah.azonedev@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "vlucas/phpdotenv": "^5.5@dev"
+    }
+}
