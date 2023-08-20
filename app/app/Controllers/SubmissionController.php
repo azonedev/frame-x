@@ -1,20 +1,25 @@
 <?php
 
 namespace App\Controllers;
+use App\View;
+
 class SubmissionController
 {
-    /**
-     * @return string
-     */
-    public function index(): string
+    public function index(): View
     {
-        return <<<HTML
-                <form method="post" action="/submissions">
-                    <input name="name" type="text" placeholder="Enter your name">
-                    <button type="submit">Submit</button>
-                </form>
-        HTML;
+        return View::make('index');
     }
+
+    public function report(): View
+    {
+        return View::make('submissions/report');
+    }
+
+    public function create(): View
+    {
+        return View::make('submissions/create');
+    }
+
     public function store(): string
     {
         return 'Hello ' . $_POST['name'];

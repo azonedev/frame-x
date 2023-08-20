@@ -10,6 +10,9 @@ $dotenv->load();
 $router = new Router();
 
 $router->get('/', [App\Controllers\SubmissionController::class, 'index']);
+$router->get('/reports', [\App\Controllers\ReportController::class, 'index']);
+
+$router->get('/submissions/create', [App\Controllers\SubmissionController::class, 'create']);
 $router->post('/submissions', [App\Controllers\SubmissionController::class, 'store']);
 
 try {
