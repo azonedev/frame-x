@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Controllers;
-use App\View;
+use App\Core\View;
 
 class SubmissionController
 {

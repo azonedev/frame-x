@@ -23,10 +23,9 @@
 
 <!--js-->
 <script>
-    jQuery(document).ready(function($) {
-        alert("js is working");
-    });
+    // jQuery(document).ready(function($) {
+    //     alert("js is working");
+    // });
 </script>
-
 
 <?php require_once __DIR__ . '/partials/footer.php'; ?>
