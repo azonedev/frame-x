@@ -1,4 +1,4 @@
-<?php require_once __DIR__ . '/partials/header.php'; ?>
+<?php require_once VIEW_PATH . '/partials/header.php'; ?>
 
 <div class="row">
     <div class="col-md-6 mt-3">
@@ -28,4 +28,4 @@
     // });
 </script>
 
-<?php require_once __DIR__ . '/partials/footer.php'; ?>
+<?php require_once VIEW_PATH . '/partials/footer.php'; ?>

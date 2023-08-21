@@ -4,11 +4,12 @@ declare(strict_types = 1);
 
 namespace App\Controllers;
 
+use App\Core\View;
 use App\Models\SubmissionModel;
 
 class ReportController
 {
-    public function index(): string
+    public function index(): View
     {
         $id = $_GET['id'] ?? null;
         $fromDate = $_GET['fromDate'] ?? null;
@@ -17,16 +18,17 @@ class ReportController
         $submissionModel = new SubmissionModel();
 
         if($id) {
-            $submission = $submissionModel->find((int) $id);
-            return json_encode($submission);
+            $data = $submissionModel->find((int) $id);
+            return View::make('reports/index', $data);
         }
 
         if($fromDate && $toDate) {
-            $submissions = $submissionModel->getByDateRange($fromDate, $toDate);
-            return json_encode($submissions);
+            $data = $submissionModel->getByDateRange($fromDate, $toDate);
+            return View::make('reports/index', $data);
         }
 
-        $submissions = $submissionModel->getAll();
-        return json_encode($submissions);
+        $data = $submissionModel->getAll();
+
+        return View::make('reports/index', $data);
     }
 }
