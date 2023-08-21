@@ -43,11 +43,14 @@ To start the containers, run the following command:
 docker-compose up -d
 ```
 
-The containers can be accessed at:
+### The containers can be accessed at:
 
-- Application Browse On (serve by Nginx): `http://localhost:8023`
+Application Browse On : 
+```
+http://localhost:8023
+```
 
-- For database `external` access the environment variables are valid if you don't change the default values:
+For database `external` access the environment variables are valid if you don't change the default values:
   - SERVER = `localhost`
   - PORT = `3306`
   - DB_DATABASE = `framex`
