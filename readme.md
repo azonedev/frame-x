@@ -26,11 +26,11 @@ To install the application, follow the steps below:
 3. Run the installation script:
 
    ```
-   sh install.sh
+   sudo sh install.sh
    ```
    or
    ```
-   ./install.sh
+   sudo ./install.sh
    ```
 
 The installation script checks for the existence of `docker-compose.yml` and `.env` files, and copies them from the example files if they do not exist. The command also installs after the docker containers up composer dependencies and restarts the containers.
