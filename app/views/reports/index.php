@@ -1,6 +1,6 @@
 <?php require_once VIEW_PATH . '/partials/header.php'; ?>
 
-<h1 class="text-center mb-5">Data List</h1>
+<h1 class="text-center mb-5">Submissions List</h1>
 
 <!-- Filter Form -->
 <form class="mb-3" action="/reports" method="GET">
