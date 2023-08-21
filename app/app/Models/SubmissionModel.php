@@ -100,6 +100,15 @@ class SubmissionModel extends Model
         return $stmt->fetchAll();
     }
 
+    public function getByDateRange($fromDate, $toDate): array
+    {
+        $stmt = $this->db->prepare("SELECT * FROM submissions WHERE entry_at BETWEEN :from_date AND :to_date ORDER BY id DESC");
+        $stmt->bindParam(':from_date', $fromDate, PDO::PARAM_STR);
+        $stmt->bindParam(':to_date', $toDate, PDO::PARAM_STR);
+        $stmt->execute();
+
+        return $stmt->fetchAll();
+    }
 
 
     public function updateHashKey(string $hashKey, int $id): void

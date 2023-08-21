@@ -21,6 +21,11 @@ class ReportController
             return json_encode($submission);
         }
 
+        if($fromDate && $toDate) {
+            $submissions = $submissionModel->getByDateRange($fromDate, $toDate);
+            return json_encode($submissions);
+        }
+
         $submissions = $submissionModel->getAll();
         return json_encode($submissions);
     }
