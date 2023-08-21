@@ -6,7 +6,7 @@
             <div class="card-body">
                 <h5 class="card-title">Create a Submission</h5>
                 <p class="card-text">Click the link below to create a submission.</p>
-                <a href="/submissions/create" class="btn btn-primary">Create Submission</a>
+                <a href="/form" class="btn btn-primary">Create Submission</a>
             </div>
         </div>
     </div>

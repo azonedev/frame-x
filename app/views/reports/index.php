@@ -29,6 +29,8 @@
     <button type="submit" class="btn btn-primary my-3">Apply Filters</button>
 </form>
 
+<!-- Back Button -->
+<a href="/" class="btn btn-secondary mb-3">Back</a>
 
 <!-- Data Table -->
 <table class="table table-bordered">

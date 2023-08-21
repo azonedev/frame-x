@@ -10,7 +10,7 @@ class ValidateCreateSubmission
         $errors = [];
 
         // Amount (only numbers)
-        if (!isset($data['amount']) || !is_numeric($data['amount'])) {
+        if (!isset($data['amount']) || !is_numeric($data['amount']) || $data['amount'] <= 0 || $data['amount'] >= 2147483647) {
             $errors['amount'] = "Amount must be a valid number.";
         }
 
@@ -50,7 +50,7 @@ class ValidateCreateSubmission
         }
 
         // Entry by (only numbers, max 10 characters)
-        if (!isset($data['entry_by']) || !is_numeric($data['entry_by'])) {
+        if (!isset($data['entry_by']) || !is_numeric($data['entry_by']) || $data['entry_by'] >= 2147483647) {
             $errors['entry_by'] = "Entry by must be a valid number.";
         }
 

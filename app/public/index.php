@@ -13,7 +13,7 @@ $router = new App\Core\Router();
 $router->get('/', [App\Controllers\IndexController::class, 'index']);
 $router->get('/reports', [\App\Controllers\ReportController::class, 'index']);
 
-$router->get('/submissions/create', [App\Controllers\SubmissionController::class, 'create']);
-$router->post('/submissions', [App\Controllers\SubmissionController::class, 'store']);
+$router->get('/form', [App\Controllers\SubmissionController::class, 'create']);
+$router->post('/create', [App\Controllers\SubmissionController::class, 'store']);
 
 (new \App\Core\App($router, new \App\Core\Config($_ENV)))->run();
