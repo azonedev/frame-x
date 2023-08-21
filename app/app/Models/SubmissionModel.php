@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Core\Model;
 use http\Exception;
+use PDO;
 
 class SubmissionModel extends Model
 {
@@ -34,7 +35,7 @@ class SubmissionModel extends Model
 
     public function create(array $data): int
     {
-        $this->db->query("
+        $stmt = $this->db->prepare("
             INSERT INTO submissions (
                 amount,
                 buyer,
@@ -60,9 +61,23 @@ class SubmissionModel extends Model
                 :hash_key,
                 :entry_by
             )
-        ", $data);
+        ");
 
-        return (int) $this->db->lastInsertId();
+        $stmt->bindParam(':amount', $data['amount'], PDO::PARAM_INT);
+        $stmt->bindParam(':buyer', $data['buyer'], PDO::PARAM_STR);
+        $stmt->bindParam(':receipt_id', $data['receipt_id'], PDO::PARAM_STR);
+        $stmt->bindParam(':items', $data['items'], PDO::PARAM_STR);
+        $stmt->bindParam(':buyer_email', $data['buyer_email'], PDO::PARAM_STR);
+        $stmt->bindParam(':buyer_ip', $data['buyer_ip'], PDO::PARAM_STR);
+        $stmt->bindParam(':note', $data['note'], PDO::PARAM_STR);
+        $stmt->bindParam(':city', $data['city'], PDO::PARAM_STR);
+        $stmt->bindParam(':phone', $data['phone'], PDO::PARAM_STR);
+        $stmt->bindParam(':hash_key', $data['hash_key'], PDO::PARAM_STR);
+        $stmt->bindParam(':entry_by', $data['entry_by'], PDO::PARAM_INT);
+
+        $stmt->execute();
+
+        return(int) $this->db->lastInsertId();
     }
 
     public function getAll()
@@ -95,6 +110,16 @@ class SubmissionModel extends Model
         }
         $query .= " ORDER BY id DESC ";
         return $this->db->query($query, $data)->fetchAll();
+    }
+
+    public function updateHashKeyFromID(int $id): void
+    {
+        $hashId = hash('sha256', $id);
+
+        $smtp = $this->db->prepare("UPDATE submissions SET hash_key = :hash_key WHERE id = :id");
+        $smtp->bindParam(':hash_key', $hashId, PDO::PARAM_STR);
+        $smtp->bindParam(':id', $id, PDO::PARAM_INT);
+        $smtp->execute();
     }
 
 
