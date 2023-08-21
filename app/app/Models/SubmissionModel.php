@@ -93,7 +93,11 @@ class SubmissionModel extends Model
             return false; // Invalid ID
         }
 
-        return $this->db->query('SELECT * FROM submissions WHERE id = :id', ['id' => $id])->fetch();
+        $stmt = $this->db->prepare("SELECT * FROM submissions WHERE id = :id");
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetch();
     }
 
 //    filter by date range or id
