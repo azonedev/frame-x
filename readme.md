@@ -32,6 +32,11 @@ To install the application, follow the steps below:
    ```
    ./install.sh
    ```
+4. Take a coffee break while the script installs the application. And here you go, the application is ready to use at:
+
+   ```
+   http://localhost:8023
+   ```
 
 The installation script checks for the existence of `docker-compose.yml` and `.env` files, and copies them from the example files if they do not exist. The command also installs after the docker containers up composer dependencies and restarts the containers.
 
