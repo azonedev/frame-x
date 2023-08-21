@@ -7,6 +7,7 @@ namespace App\Controllers;
 use App\Core\View;
 use App\Models\SubmissionModel;
 use App\RequestValidators\ValidateCreateSubmission;
+use App\Services\SubmissionService;
 
 class SubmissionController
 {
@@ -18,13 +19,14 @@ class SubmissionController
     public function store(): string
     {
         $validator = new ValidateCreateSubmission();
+        $submissionModel = new SubmissionModel();
+        $service = new SubmissionService();
+
         $errors = $validator->validate($_POST);
         if (!empty($errors)) {
             http_response_code(422);
             return json_encode($errors);
         }
-
-        $submissionModel = new SubmissionModel();
 
         $data = [
             'amount' => $_POST['amount'],
@@ -36,29 +38,15 @@ class SubmissionController
             'city' => $_POST['city'],
             'phone' => $_POST['phone'],
             'entry_by' => $_POST['entry_by'],
-            'buyer_ip' => $this->getClientIp(),
+            'buyer_ip' => $service->getClientIp(),
         ];
 
         $submissionID = $submissionModel->create($data);
-        $submissionModel->updateHashKeyFromID($submissionID);
+        $hashKey = $service->makeHashKeyFromID($submissionID);
+        $submissionModel->updateHashKey($hashKey, $submissionID);
 
         http_response_code(201);
         return 'Submission created successfully';
-    }
-
-    protected function getClientIp(): string
-    {
-        //whether ip is from the share internet
-        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
-            $ip = $_SERVER['HTTP_CLIENT_IP'];
-        } //whether ip is from the proxy
-        elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-        } //whether ip is from the remote address
-        else {
-            $ip = $_SERVER['REMOTE_ADDR'];
-        }
-        return $ip;
     }
 
 }

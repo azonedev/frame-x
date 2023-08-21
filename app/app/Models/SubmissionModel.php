@@ -80,49 +80,32 @@ class SubmissionModel extends Model
         return(int) $this->db->lastInsertId();
     }
 
-    public function getAll()
+    public function getAll(): array
     {
         $stmt = $this->db->query("SELECT * FROM submissions ORDER BY id DESC");
         return $stmt->fetchAll();
     }
 
-    public function find(int $id)
+    public function find(int $id): array
     {
         // Validate the input
         if ($id <= 0) {
-            return false; // Invalid ID
+            return []; // Invalid ID
         }
 
         $stmt = $this->db->prepare("SELECT * FROM submissions WHERE id = :id");
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
 
-        return $stmt->fetch();
+        return $stmt->fetchAll();
     }
 
-//    filter by date range or id
-    public function filter($data)
-    {
-        $query = "SELECT * FROM submissions WHERE 1=1 ";
-        if (isset($data['id']) && $data['id'] != '') {
-            $query .= " AND id = :id ";
-        }
-        if (isset($data['from_date']) && $data['from_date'] != '') {
-            $query .= " AND entry_at >= :from_date ";
-        }
-        if (isset($data['to_date']) && $data['to_date'] != '') {
-            $query .= " AND entry_at <= :to_date ";
-        }
-        $query .= " ORDER BY id DESC ";
-        return $this->db->query($query, $data)->fetchAll();
-    }
 
-    public function updateHashKeyFromID(int $id): void
-    {
-        $hashId = hash('sha256', $id);
 
+    public function updateHashKey(string $hashKey, int $id): void
+    {
         $smtp = $this->db->prepare("UPDATE submissions SET hash_key = :hash_key WHERE id = :id");
-        $smtp->bindParam(':hash_key', $hashId, PDO::PARAM_STR);
+        $smtp->bindParam(':hash_key', $hashKey, PDO::PARAM_STR);
         $smtp->bindParam(':id', $id, PDO::PARAM_INT);
         $smtp->execute();
     }
