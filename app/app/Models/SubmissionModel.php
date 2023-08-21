@@ -82,7 +82,8 @@ class SubmissionModel extends Model
 
     public function getAll()
     {
-        return $this->db->query("SELECT * FROM submissions ORDER BY id DESC")->fetchAll();
+        $stmt = $this->db->query("SELECT * FROM submissions ORDER BY id DESC");
+        return $stmt->fetchAll();
     }
 
     public function find(int $id)
