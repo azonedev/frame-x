@@ -25,7 +25,7 @@ class SubmissionController
         $errors = $validator->validate($_POST);
         if (!empty($errors)) {
             http_response_code(422);
-            return json_encode($errors);
+            return json_encode(['errors'=>$errors]);
         }
 
         $data = [
