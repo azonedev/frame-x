@@ -34,7 +34,7 @@ docker-compose up -d
 
 #composer dependencies
 echo "Installing composer dependencies"
-docker-compose exec framexapp composer install --prefer-source
+docker-compose exec php composer install
 
 #up containers
 echo "Re-start containers"

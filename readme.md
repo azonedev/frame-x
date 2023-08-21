@@ -37,6 +37,11 @@ To install the application, follow the steps below:
    ```
    http://localhost:8023
    ```
+If error occurs, related to composer dependencies, run the following command:
+```
+docker-compose exec php composer install
+```
+
 
 The installation script checks for the existence of `docker-compose.yml` and `.env` files, and copies them from the example files if they do not exist. The command also installs after the docker containers up composer dependencies and restarts the containers.
 
