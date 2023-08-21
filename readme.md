@@ -26,11 +26,11 @@ To install the application, follow the steps below:
 3. Run the installation script:
 
    ```
-   sh install.sh
+   sudo sh install.sh
    ```
    or
    ```
-   ./install.sh
+   sudo ./install.sh
    ```
 4. Take a coffee break while the script installs the application. And here you go, the application is ready to use at:
 
